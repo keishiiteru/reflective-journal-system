@@ -32,16 +32,16 @@
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
+            <router-link class="nav-link" active-class="active" to="/my-entries">
               <span><font-awesome-icon icon="fa-solid fa-list" /></span>
               Entries
-            </a>
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <router-link class="nav-link" active-class="active" to="/compose">
               <span><font-awesome-icon icon="fa-solid fa-pen" /></span>
               Compose
-            </a>
+            </router-link>
           </li>
         </ul>
 
@@ -81,9 +81,8 @@
     </nav>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">My Entries</h1>
-      </div>
+      <!-- Router Link -->
+        <router-view/>
     </main>
   </div>
 </div>

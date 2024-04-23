@@ -9,7 +9,9 @@ import '@popperjs/core';
 
 import { createApp } from 'vue'
 
-import app from './components/app.vue'
+import app from './App.vue'
+
+import router from './router.js'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -23,4 +25,5 @@ library.add(faList, faPen)
 
 createApp(app)
     .component('font-awesome-icon', FontAwesomeIcon)
+    .use(router)
     .mount("#app")
