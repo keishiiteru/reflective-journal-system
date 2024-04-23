@@ -34,7 +34,7 @@
           <li class="nav-item">
             <router-link class="nav-link" active-class="active" to="/my-entries">
               <span><font-awesome-icon icon="fa-solid fa-list" /></span>
-              Entries
+              My Entries
             </router-link>
           </li>
           <li class="nav-item">
