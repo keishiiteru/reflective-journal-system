@@ -12,7 +12,9 @@ class EntryController extends Controller
      */
     public function index()
     {
-        //
+        $entries = Entry::orderBy('created_at','DESC')->get();
+
+        return response()->json(['entries' => $entries],200);
     }
 
     /**
