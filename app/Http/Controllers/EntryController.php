@@ -10,9 +10,18 @@ class EntryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $entries = Entry::orderBy('created_at','DESC')->get();
+        $search = $request->get('search');
+
+        if($search){
+            $entries = Entry::where('title', 'LIKE', "%{$search}%")
+                            ->orWhere('content', 'LIKE', "%{$search}%")
+                            ->orderBy('created_at', 'DESC')
+                            ->get();
+        }else{
+            $entries = Entry::orderBy('created_at','DESC')->get();
+        }
 
         return response()->json(['entries' => $entries],200);
     }
@@ -50,8 +59,12 @@ class EntryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $entry = Entry::findOrFail($id);
+        $entry->delete();
+
+        return response()->json(['message' => 'Entry deleted successfully!'], 201);
+
     }
 }

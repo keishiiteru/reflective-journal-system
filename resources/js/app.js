@@ -21,7 +21,9 @@ import { faList } from '@fortawesome/free-solid-svg-icons'
 
 import { faPen } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faList, faPen)
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faList, faPen, faTrash)
 
 createApp(app)
     .component('font-awesome-icon', FontAwesomeIcon)
