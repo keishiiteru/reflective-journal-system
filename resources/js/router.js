@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
 import MyEntries from './components/MyEntries.vue'
 import Compose from './components/Compose.vue'
+import ViewEntry from './components/ViewEntry.vue'
 
 const routes = [
 
@@ -12,6 +13,10 @@ const routes = [
         path:'/compose',
         component: Compose
     },
+    {
+        path:'/view/:id',
+        component: ViewEntry
+    }
 ]
 
 const router = createRouter({

@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{item.title}}</h5>
                     <p class="card-text ellipsis">{{item.content}}</p>
-                    <a href="#" class="btn btn-primary">See more</a>
+                    <a @click="viewEntry(item.id)" class="btn btn-primary">See more</a>
                 </div>
             </div>
         </div>
@@ -28,6 +28,9 @@
 <script setup>
     import { onMounted, ref } from "vue"
     import moment from 'moment'
+    import { useRouter } from "vue-router"
+
+    const router = useRouter()
 
     let entries = ref([])
 
@@ -57,6 +60,10 @@
             alert(response.data.message);
             getEntries()
         }
+    }
+
+    const viewEntry = (id) => {
+        router.push('/view/'+id)
     }
 
     const formatDate = (dateString) => {
