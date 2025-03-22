@@ -15,11 +15,11 @@
 </style>
 
 <template>
-    <Header />
+    <Header v-if="!isSignInPage" />
     <div class="container-fluid">
         <div class="row">
-            <Sidebar />
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <Sidebar v-if="!isSignInPage" />
+            <main :class="isSignInPage ? 'w-100' : 'col-md-9 ms-sm-auto col-lg-10 px-md-4'">
             <!-- Router Link -->
                 <router-view/>
             </main>
@@ -28,6 +28,12 @@
 </template>
 
 <script setup>
+    import { computed } from "vue";
+    import { useRoute } from 'vue-router';
     import Sidebar from './layout/Sidebar.vue';
     import Header from './layout/Header.vue';
+
+    const route = useRoute();
+    const isSignInPage = computed(() => route.path === "/sign-in");
+
 </script>
