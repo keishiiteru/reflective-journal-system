@@ -38,6 +38,7 @@
             if(token){
                 localStorage.setItem('token', token)
                 localStorage.setItem('user', JSON.stringify(user))
+                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
                 window.location.href = '/'
             }
 

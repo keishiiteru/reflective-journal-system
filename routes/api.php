@@ -9,6 +9,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::apiResource('entries', EntryController::class);
+Route::apiResource('entries', EntryController::class)->middleware('auth:sanctum');
 
 Route::post('login', [AuthController::class, 'login']);
