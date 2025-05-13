@@ -6,8 +6,29 @@
         </button>
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-            <router-link class="nav-link px-3" to="/sign-in">Sign out</router-link>
+                <button class="nav-link px-3" @click="logout">Sign out</button>
             </div>
         </div>
      </header>
 </template>
+
+<script setup>
+    import { ref } from "vue"
+    import { useRouter } from "vue-router"
+
+    const logout = async() => {
+        try
+        {
+            await axios.post('/api/logout')
+        } catch (error) {
+            console.error(error)
+        }
+
+         // Clear the token from storage
+        localStorage.removeItem('token');
+
+        // Redirect to sign-in page
+        window.location.href = '/';
+    }
+
+</script>
