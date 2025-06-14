@@ -11,7 +11,14 @@
             <div class="card mb-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     {{ formatTime(item.created_at) }}
-                    <i class="text-danger" @click="deleteEntry(item.id)"><font-awesome-icon icon="fa-solid fa-trash" /></i>
+                    <div class="row">
+                        <div class="col">
+                            <i class="text-info" @click="editEntry(item.id)"><font-awesome-icon icon="fa-solid fa-pen" /></i>
+                        </div>
+                        <div class="col">
+                            <i class="text-danger" @click="deleteEntry(item.id)"><font-awesome-icon icon="fa-solid fa-trash" /></i>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{item.title}}</h5>
@@ -64,6 +71,10 @@
 
     const viewEntry = (id) => {
         router.push('/view/'+id)
+    }
+
+    const editEntry = (id) => {
+        router.push('/edit/'+id)
     }
 
     const formatDate = (dateString) => {

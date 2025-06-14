@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EntryController extends Controller
 {
@@ -15,12 +16,17 @@ class EntryController extends Controller
         $search = $request->get('search');
 
         if($search){
-            $entries = Entry::where('title', 'LIKE', "%{$search}%")
-                            ->orWhere('content', 'LIKE', "%{$search}%")
+            $entries = Entry::where('user_id',Auth::user()->id)
+                             ->whereAny([
+                                'title',
+                                'content',
+                             ], 'LIKE', "%{$search}%")
                             ->orderBy('created_at', 'DESC')
                             ->get();
         }else{
-            $entries = Entry::orderBy('created_at','DESC')->get();
+            $entries = Entry::where('user_id',Auth::user()->id)
+                            ->orderBy('created_at','DESC')
+                            ->get();
         }
 
         return response()->json(['entries' => $entries],200);
@@ -32,7 +38,7 @@ class EntryController extends Controller
     public function store(Request $request)
     {
         $entry = Entry::create([
-            'user_id' => 0,
+            'user_id' => Auth::user()->id,
             'title' => $request->title,
             'content' => $request->content
         ]);
@@ -55,7 +61,18 @@ class EntryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $entry = Entry::findOrFail($id); // Find the entry by ID
+
+        if ($entry->user_id !== Auth::id()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        $entry->update([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+         return response()->json(['message' => 'Entry updated successfully!', 'entry' => $entry], 201);
     }
 
     /**

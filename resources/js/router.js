@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router"
 import MyEntries from './components/MyEntries.vue'
 import Compose from './components/Compose.vue'
 import ViewEntry from './components/ViewEntry.vue'
+import EditEntry from './components/EditEntry.vue'
 import SignIn from './components/SignIn.vue'
 import axios from 'axios';
 
@@ -20,6 +21,11 @@ const routes = [
     {
         path:'/view/:id',
         component: ViewEntry,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/edit/:id',
+        component: EditEntry,
         meta: { requiresAuth: true }
     },
     {
